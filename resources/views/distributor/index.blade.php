@@ -265,8 +265,8 @@
                     <div class="d-flex justify-content-center align-items-center">
                       <span class="me-2">{{ $nmr + 1 . "." }}</span>
                       <div>
-                        <img src="be/assets/img/icons/signature.png" alt="Edit" width="18" class="cursor-pointer me-2" title="Edit">
-                        <img src="be/assets/img/icons/trash-filled.png" alt="Delete" width="18" class="cursor-pointer" title="Delete">
+                      <a href="{{ route('distributor.edit', $data->id) }}"> <img src="be\assets\img\icons\signature.png" alt="gambar pen" width="20" class="cursor-pointer me-2" title="Edit" > </a>
+                      <a href="{{ route('distributor.edit', $data->id) }}"><img src="be\assets\img\icons\trash-filled.png" alt="gambar sampah" width="20" class="cursor-pointer me-2" title="Delete"></a>
                       </div>
                     </div>
                   </td>
