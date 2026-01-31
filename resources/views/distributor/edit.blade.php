@@ -166,7 +166,18 @@
                             <label for="notelpon_distributor" class="form-label">No Telpon</label>
                             <input type="text" class="form-control" id="notelpon_distributor" name="notelpon_distributor" placeholder="Enter Phone Number" value="{{ $data->notelpon_distributor }}": required>
                         </div>
-                        <button type="button" class="btn btn-primary" id="btnsimpan">Submit</button>
+                        <div class="d-flex justify-content-start gap-2 mt-3">
+    <!-- Tombol Update -->
+    <button type="button" class="btn btn-primary" id="btnsimpan">
+        Update Distributor Data
+    </button>
+
+    <!-- Tombol Cancel -->
+    <a href="{{ route('distributor.index') }}" class="btn btn-secondary">
+        Cancel
+    </a>
+</div>
+
                 </div>
             </div>
         </div>
@@ -253,6 +264,10 @@
             frm.submit();
         });
     });
+
+    @if (session('duplikat'))
+        swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
+    @endif
 </script>
 
     </div>

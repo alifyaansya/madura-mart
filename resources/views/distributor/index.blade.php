@@ -364,5 +364,8 @@
       @if (session('simpan'))
         swal("Good Job!", "{{ session('simpan') }}", "success");
       @endif
+      @if (session('ubah'))
+        swal("Good Job!", "{{ session('ubah') }}", "success");
+  
     </script>
 @endsection

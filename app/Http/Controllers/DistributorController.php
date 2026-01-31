@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Distributor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class DistributorController extends Controller
 {
@@ -20,6 +22,13 @@ class DistributorController extends Controller
             'datas' => Distributor::all()
         ]);
     } 
+
+
+protected $fillable = [
+        'nama_distributor',
+        'alamat_distributor',
+        'notelpon_distributor',
+    ];
 
     /**
  * Show the form for creating a new resource.
@@ -80,7 +89,21 @@ public function create()
      */
     public function update(Request $request, $id)
     {
-        //
+        $distributor_lama = DB::table('distributors')->where('id', $id)->value('nama_distributor');
+        $distributor = DB::table('distributors')->where('nama_distributor', $request->nama_distributor)->value('nama_distributor');
+        $alamat = DB::table('distributors')->where('alamat_distributor', $request->alamat_distributor)->value('alamat_distributor');
+        $notelpon = DB::table('distributors')->where('notelpon_distributor', $request->notelpon_distributor)->value('notelpon_distributor');
+
+        if ($request->nama_distributor == $distributor && $request->alamat_distributor == $alamat && $request->notelpon_distributor == $notelpon) {
+            return redirect()->route('distributor.edit')->with('duplikat', 'Distributor ' .
+            $request->nama_distributor . ' data with address ' . $request->alamat_distributor . ' and telephone number ' . $request->notelpon_distributor . ' is already in the database!')->withInput();
+        }else{
+            $data = $request->only(['nama_distributor', 'alamat_distributor', 'notelpon_distributor']);
+            $distributor = Distributor::findOrFail($id);
+            $distributor->update($data);
+            return redirect()->route('distributor.index')->with('ubah', 'The Distributor data, ' .
+            $distributor_lama . ' Change To ' . $request->nama_distributor . ', has been successfuly updated! ');
+        }
     }
 
     /**
