@@ -1,10 +1,8 @@
-@extends ('be.master')
+@extends('be.master')
 @section('menu')
-    @include ('be.menu')
+    @include('be.menu')
 @endsection
 @section('distributor')
-    <!-- NAVBAR ATAS -->
-
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
         navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
@@ -16,6 +14,9 @@
                 <h6 class="font-weight-bolder mb-0">{{ $title }}</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                {{-- <div class="d-flex align-items-center">
+                    <a href="{{ route('distributor.create') }}" class="btn bg-gradient-dark w-100 my-4 mb-4"> Add new Distributor</a>
+                <div> --}}
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
@@ -24,10 +25,8 @@
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
-                        <!-- <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
-                                        href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
-
-
+                        <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
+                            href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
@@ -137,139 +136,120 @@
             </div>
         </div>
     </nav>
-
-    <!-- END NAVBAR ATAS -->
-
-    <!-- Main Bagian Kanan -->
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Edit {{ $title }} Data</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                
-                    <!-- Forms -->
-                    <form action="{{ route('distributor.update', $data->id) }}" method="POST" class="p-3" id="frm">
-                        @method('PUT')
-                        @csrf
-                        <div class="mb-3">
-                            <label for="nama_distributor" class="form-label">Nama Distributor</label>
-                            <input type="text" class="form-control" id="nama_distributor" name="nama_distributor" placeholder="Enter Distributor Name" value="{{ $data->nama_distributor }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat_distributor" class="form-label">Alamat</label>
-                            <textarea class="form-control" id="alamat_distributor" name="alamat_distributor" rows="5" placeholder="Enter Address">{{ $data->alamat_distributor }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notelpon_distributor" class="form-label">No Telpon</label>
-                            <input type="text" class="form-control" id="notelpon_distributor" name="notelpon_distributor" placeholder="Enter Phone Number" value="{{ $data->notelpon_distributor }}": required>
-                        </div>
-                        <div class="d-flex justify-content-start gap-2 mt-3">
-    <!-- Tombol Update -->
-    <button type="button" class="btn btn-primary" id="btnsimpan">
-        Update Distributor Data
-    </button>
-
-    <!-- Tombol Cancel -->
-    <a href="{{ route('distributor.index') }}" class="btn btn-secondary">
-        Cancel
-    </a>
-</div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Main Bagian Kanan -->
-
+    <!-- End Navbar -->
     <div class="container-fluid py-4">
-
-        <footer class="footer pt-3  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                            for a better web.
+        <!--- Main Bagian Kanan --->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Edit {{ $title }} Data</h6>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative
-                                    Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About
-                                    Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <form action="{{ route('distributor.update', $data->id) }}" method="POST" id="frm">
+                                @method('PUT')
+                                @csrf
+                                <div class="row ms-3 me-3">
+                                    <div class="col-12">
+                                        <div class="mb-3 px-3 pt-3">
+                                            <label for="nama_distributor" class="form-label">Nama Distributor</label>
+                                            <input type="text" class="form-control" id="nama_distributor" name="nama_distributor" placeholder="Enter Distributor Name" value="{{ $data->nama_distributor }}" required>
+                                        </div>
+                                        <div class="mb-3 px-3 pt-3">
+                                            <label for="alamat_distributor" class="form-label">Alamat Distributor</label>
+                                            <textarea type="text" class="form-control" id="alamat_distributor" name="alamat_distributor" rows="5" placeholder="Enter Address" required>{{ $data->alamat_distributor }}</textarea>
+                                        </div>
+                                        <div class="mb-3 px-3 pt-3">
+                                            <label for="notelpon_distributor" class="form-label">No. Telp</label>
+                                            <input type="text" class="form-control" id="notelpon_distributor" name="notelpon_distributor" placeholder="Enter Phone Number" value="{{ $data->notelpon_distributor }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ms-3 me-3 mt-3">
+                                    <div class="col-12">
+                                        <div class="px-3 pb-3 text-end">
+                                            <a href="{{ route('distributor.index') }}" class="btn bg-gradient-secondary me-3">Cancel</a>
+                                            <button type="button" id="simpan" class="btn bg-gradient-primary"> Save New {{ $title }} Data </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <footer class="footer pt-3  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>,
+                                made with <i class="fa fa-heart"></i> by
+                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
+                                    Tim</a>
+                                for a better web.
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com" class="nav-link text-muted"
+                                        target="_blank">Creative Tim</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
+                                        target="_blank">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
+                                        target="_blank">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
+                                        target="_blank">License</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script>
+                let btnSimpan = document.getElementById('simpan');
+                let frm = document.getElementById('frm');
+                let nama_distributor = document.getElementById('nama_distributor');
+                let alamat_distributor = document.getElementById('alamat_distributor');
+                let notelpon_distributor = document.getElementById('notelpon_distributor');
 
-<script>
-    let btnsimpan = document.getElementById('btnsimpan');
-    let frm = document.getElementById('frm');
-    let nama_distributor = document.getElementById('nama_distributor');
-    let alamat_distributor = document.getElementById('alamat_distributor');
-    let notelpon_distributor = document.getElementById('notelpon_distributor');
+                btnSimpan.addEventListener('click', function() {
+                    
+                    if(nama_distributor.value.trim() === ''){
+                        nama_distributor.focus();
+                        swal("Invalid!", "Distibutor Nama cannot be empty", "error");
+                        return;
+                    }
+                    else if(alamat_distributor.value.trim() === ''){
+                        alamat_distributor.focus();
+                        swal("Invalid!", "Distibutor Address cannot be empty", "error");
+                        return;
+                    }
+                    else if(notelpon_distributor.value.trim() === ''){
+                        notelpon_distributor.focus();
+                        swal("Invalid!", "Distibutor Phone Number cannot be empty", "error");
+                        return;
+                    }
+                    else{
+                        frm.submit();
+                    }
+                });
 
-    btnsimpan.addEventListener('click', function () {
-
-        if (nama_distributor.value.trim() === '') {
-            swal("Invalid", "Nama Distributor tidak boleh kosong!", "error");
-            nama_distributor.focus();
-            return;
-        }
-
-        if (alamat_distributor.value.trim() === '') {
-            swal("Invalid", "Alamat tidak boleh kosong!", "error");
-            alamat_distributor.focus();
-            return;
-        }
-
-        if (notelpon_distributor.value.trim() === '') {
-            swal("Invalid", "No Telpon tidak boleh kosong!", "error");
-            notelpon_distributor.focus();
-            return;
-        }
-
-        // Animasi sukses
-        swal({
-            title: "Berhasil!",
-            text: "Data akan disimpan",
-            icon: "success",
-            buttons: false,
-            timer: 1500
-        }).then(() => {
-            frm.submit();
-        });
-    });
-
-    @if (session('duplikat'))
-        swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
-    @endif
-</script>
-
-    </div>
-
-@endsection
+                @if (session('duplikat'))
+                    swal('Duplicated Data', '{{ session('duplikat') }}', 'error');
+                @endif
+            </script>
+        </div>
+    @endsection

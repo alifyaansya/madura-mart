@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Distributor extends Model
 {
-     protected $fillable = [
+    use HasFactory;
+
+    protected $table = 'distributors';
+
+    protected $fillable = [
         'nama_distributor',
         'alamat_distributor',
         'notelpon_distributor',

@@ -2,7 +2,7 @@
 @section('menu')
     @include ('be.menu')
 @endsection
-@section('distributor')
+@section('products')
     <!-- NAVBAR ATAS -->
 
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -154,19 +154,41 @@
                     <form action="{{ route('distributor.store') }}" method="POST" class="p-3" id="frm">
                         @csrf
                         <div class="mb-3 px-3 pt-3">
-                            <label for="nama_distributor" class="form-label">Nama Distributor</label>
-                            <input type="text" class="form-control" id="nama_distributor"
-                                name="nama_distributor" placeholder="Enter Distributor Name" value="{{ old('nama_distributor') }}">
+                            <div class="mb-3 px-3">
+                            <label for="kdbarang" class="form-label">Code</label>
+                            <input type="text" class="form-control" id="kdbarang"
+                                name="kdbarang" placeholder="Enter Product Code" value="{{ old('kdbarang') }}">
                         </div>
                         <div class="mb-3 px-3">
-                            <label for="alamat_distributor" class="form-label">Alamat</label>
-                            <textarea class="form-control" id="alamat_distributor" name="alamat_distributor" rows="5" placeholder="Enter Address">{{ old('alamat_distributor') }}</textarea>
+                            <label for="nama_barang" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="nama_barang"
+                                name="nama_barang" placeholder="Enter Product Name" value="{{ old('nama_barang') }}">
                         </div>
                         <div class="mb-3 px-3">
-                            <label for="notelpon_distributor" class="form-label">No Telpon</label>
-                            <input type="text" class="form-control" id="notelpon_distributor" 
-                            name="notelpon_distributor" placeholder="Enter Phone Number" value="{{ old('notelpon_distributor') }}">
+                            <label for="jenis_barang" class="form-label">Type</label>
+                            <input type="text" class="form-control" id="jenis_barang"
+                                name="jenis_barang" placeholder="Enter Product Type" value="{{ old('jenis_barang') }}">
                         </div>
+                        <div class="mb-3 px-3">
+                            <label for="expired_date" class="form-label">Expired Date</label>
+                            <input type="date" class="form-control" id="expired_date"
+                                name="expired_date" value="{{ old('expired_date') }}">
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="harga_jual" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="harga_jual"
+                                name="harga_jual" placeholder="Enter Product Price" value="{{ old('harga_jual') ?? old('harga_jual') }}">
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="stok" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stok"
+                                name="stok" placeholder="Enter Product Stock" value="{{ old('stok') ? old('stok') : 0 }}" readonly>
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="foto_barang" class="form-label">Image</label>
+                            <textarea class="form-control" id="foto_barang" name="foto_barang" rows="5" placeholder="Enter Product Image">{{ old('foto_barang') }}</textarea>
+                        </div>
+                        
                         <button type="button" class="btn btn-primary" id="btnsimpan">Submit</button>
                 </div>
             </div>
@@ -219,28 +241,31 @@
 <script>
     let btnsimpan = document.getElementById('btnsimpan');
     let frm = document.getElementById('frm');
-    let nama_distributor = document.getElementById('nama_distributor');
-    let alamat_distributor = document.getElementById('alamat_distributor');
-    let notelpon_distributor = document.getElementById('notelpon_distributor');
+    let kdbarang = document.getElementById('kdbarang');
+    let nama_barang = document.getElementById('nama_barang');
+    let jenis_barang = document.getElementById('jenis_barang');
+    let tgl_expired = document.getElementById('tgl_expired');
+    let foto_barang = document.getElementById('foto_barang');
 
     btnsimpan.addEventListener('click', function () {
 
-        if (nama_distributor.value.trim() === '') {
-            swal("Invalid", "Nama Distributor tidak boleh kosong!", "error");
-            nama_distributor.focus();
-            return;
-        }
-
-        if (alamat_distributor.value.trim() === '') {
-            swal("Invalid", "Alamat tidak boleh kosong!", "error");
-            alamat_distributor.focus();
-            return;
-        }
-
-        if (notelpon_distributor.value.trim() === '') {
-            swal("Invalid", "No Telpon tidak boleh kosong!", "error");
-            notelpon_distributor.focus();
-            return;
+        if (kdbarang.value.trim() === '') {
+            kdbarang.focus();
+            swal("Invalid", "Product Code Cannot be Empty!", "error");
+        } else if (nama_barang.value.trim() === '') {
+            nama_barang.focus();
+            swal("Invalid", "Product Name Cannot be Empty!", "error");
+        } else if (jenis_barang.value.trim() === '') {
+            jenis_barang.focus();
+            swal("Invalid", "Product Type Cannot be Empty!", "error");
+        } else if (tgl_expired.value.trim() === '') {
+            tgl_expired.focus();
+            swal("Invalid", "Expired Date Cannot be Empty!", "error");
+        } else if (foto_barang.value.trim() === '') {
+            foto_barang.focus();
+            swal("Invalid", "Product Image Cannot be Empty!", "error");
+        } else {
+            frm.submit();
         }
 
         // Animasi sukses
@@ -259,9 +284,7 @@
     swal("Data Duplikat!", "{{ session('duplikat') }}", "error");
   @endif
 
-  @if (session('simpan'))
-    swal("Good Job!", "{{ session('simpan') }}", "success");
-  @endif
+ 
 
 </script>
 

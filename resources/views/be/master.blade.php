@@ -66,6 +66,9 @@
  @if ($title === 'Distributor')
     @yield('distributor')
     @endif
+  @if ($title === 'Products')
+    @yield('products')
+    @endif
 
 
   </main>

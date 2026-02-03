@@ -2,13 +2,13 @@
 @section('menu')
     @include('be.menu')
 @endsection
-@section('distributor')
+@section('products')
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Distributor</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Products</li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $title }}</li>
         </ol>
         
@@ -24,7 +24,7 @@
         <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
             <div class="mx-3">
-              <a href="{{route('distributor.create')}}" class="btn btn-primary btn-sm mb-0">Add New {{$title}}</a>
+              <a href="{{route('products.create')}}" class="btn btn-primary btn-sm mb-0">Add New {{$title}}</a>
       
             </li>
             <li class="nav-item d-flex align-items-center">
@@ -250,10 +250,14 @@
             <table class="table align-items-center mb-0 text-center">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7">No</th>
-                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7">Distributor's Name</th>
-                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7">Addresses</th>
-                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7">Phone Number</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2 w-1">No</th>
+                  <th colspan="2" class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Code</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Name</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Type</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Expired Date</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Price</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Stock</th>
+                  <th class="text-uppercase text-primary text-xs font-weight-bolder opacity-7 ps-2">Image</th>
                 </tr>
               </thead>
 
@@ -265,9 +269,18 @@
                     <div class="d-flex justify-content-center align-items-center">
                       <span class="me-2">{{ $nmr + 1 . "." }}</span>
                       <div>
-                      <a href="{{ route('distributor.edit', $data->id)}}"> <img src="be\assets\img\icons\signature.png" alt="gambar pen" width="20" class="cursor-pointer me-2" title="Edit" > </a>
-                      <a href="{{ route('distributor.destroy', $data->id)}}" onclick="hapus(event, this)"><img src="be\assets\img\icons\trash-filled.png" alt="gambar sampah" width="20" class="cursor-pointer me-2" title="Delete"></a>
-                      </div>
+                      <a href="{{ route('distributor.edit', $data->id)}}"> <img src="be\assets\img\signature.png" alt="gambar pen" width="20" class="cursor-pointer me-2" title="Edit" > </a>
+                      <a href="{{ route('distributor.destroy', $data->id)}}" onclick="hapus(event, this)"><img src="be\assets\img\trash-filled.png" alt="gambar sampah" width="20" class="cursor-pointer me-2" title="Delete"></a>
+                    <td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">{{ $data->kdbarang }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">{{ $data->nama_barang }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">{{ $data->jenis_barang }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">{{ $data->expired_date }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">Rp. {{ number_format($data->harga_barang, 0, ',', '.') }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">{{ $data->stok_barang }}</td>
+                    <td class="text-xs font-weight-bold mb-0 ps-0">
+                        <img src="{{ asset('be/assets/img/products/' . $data->image_barang) }}" class="img-thumbnail" cursor-pointer alt="Gambar Barang" width="50" title="{{ $data->image_barang }}">
+                </div>
                     </div>
                   </td>
 
